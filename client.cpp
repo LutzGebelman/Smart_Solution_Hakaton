@@ -6,13 +6,13 @@ void Yes() {
     system("color 70");
     int i = rand();
     Vladimir.name = "Vladimir";
-    Vladimir.last_name = "Sidorovich";
+    Vladimir.last_name = "Vladimirovich";
     Vladimir.number = "#002342";
     Vladimir.position = "Explorer";
     while (true) {
         system("cls");
         Vladimir.Update_Data();
-
+        Vladimir.Output();
         if (Vladimir.Temperature >= 37.5 || Vladimir.Pulse > 120 || Vladimir.blood_Saturation < 95) {
             Vladimir.Emergency();
         }
