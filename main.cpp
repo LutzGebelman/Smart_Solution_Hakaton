@@ -36,10 +36,11 @@ void Emergency (const Data& patient){
     cout << " _______________________________________________________ " << endl;
 }
 
-int main() {
+void Yes(){
     Data Vladimir;
-    vector<int>v {50, 40, 30, 20, 10, 9, 8, 5, 4, 3, 2, 1, 0};
-    for (int i : v){
+    srand(time(NULL));
+    while(true){
+        int i = rand();
         Vladimir.name = "Vladimir";
         Vladimir.Pulse = random_number(i) % 90 + 60;
         Vladimir.Alcohol = random_number(i) / 100000.0;
@@ -53,16 +54,41 @@ int main() {
             Emergency(Vladimir);
         }
 
-        /*cout << Vladimir.name << endl
-            << "Pulse is: " << Vladimir.Pulse << endl
-             << "Alcohol in milliliters is: " << Vladimir.Alcohol << endl
-             << "Temperature is: " << Vladimir.Temperature << endl
-             << "Upper blood pressure is: " << Vladimir.Upper_Blood_Pressure << endl
-             << "Lower blood pressure is: " << Vladimir.Lower_Blood_Pressure << endl
-             << "Blood saturation is: " << Vladimir.blood_Saturation << endl
-             << "_______________________________________" << endl;*/
-        this_thread::sleep_for(chrono::seconds(1));
+
+        this_thread::sleep_for(chrono::seconds(5));
     }
+}
+
+void Input() {
+    string input;
+    while(cin >> input) {
+        Data Vladimir;
+        srand(time(NULL));
+        int i = rand();
+        Vladimir.name = "Vladimir";
+        Vladimir.Pulse = random_number(i) % 90 + 60;
+        Vladimir.Alcohol = random_number(i) / 100000.0;
+        Vladimir.Temperature = (random_number(i) % 30 + 350) / 10.0;
+        Vladimir.Upper_Blood_Pressure = random_number(i) % 50 + 100;
+        Vladimir.Lower_Blood_Pressure = Vladimir.Upper_Blood_Pressure - (random_number(i) % 9) - 40;
+        Vladimir.blood_Saturation = random_number(i) % 8 + 92;
+        if (input == "Status") {
+            cout << Vladimir.name << endl
+                 << "Pulse is: " << Vladimir.Pulse << endl
+                 << "Alcohol in milliliters is: " << Vladimir.Alcohol << endl
+                 << "Temperature is: " << Vladimir.Temperature << endl
+                 << "Upper blood pressure is: " << Vladimir.Upper_Blood_Pressure << endl
+                 << "Lower blood pressure is: " << Vladimir.Lower_Blood_Pressure << endl
+                 << "Blood saturation is: " << Vladimir.blood_Saturation << endl
+                 << "_______________________________________" << endl;
+        }
+    }
+}
+
+int main() {
+    thread thread1(Yes);
+    thread thread2(Input);
+    thread1.join();
 
     return 0;
 }
